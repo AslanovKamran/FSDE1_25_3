@@ -122,8 +122,22 @@
 # result = int(prompt) * 2
 # print(f"Result is {result}")
 
-number = 12345
-lastNumber = number % 10
-print(lastNumber)
-preLastNumber = (number // 10) % 10
-print(preLastNumber)
+# number = 12345
+# lastNumber = number % 10
+# print(lastNumber)
+# preLastNumber = (number // 10) % 10
+# print(preLastNumber)
+
+# print("HiKamran")
+
+# print("Hello")
+# print("Valida")
+
+
+# print("Hello! My name's Farhad")
+# print('He said: "My name is Farhad"')
+
+print(4_000_000)
+print(4==4)
+
+
