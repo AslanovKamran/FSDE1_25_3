@@ -46,17 +46,19 @@
 # print(takeAnUmbrella)
 
 
-money = False
-ticket = True
+# money = False
+# ticket = True
 
-isLuggageBig = False
+# isLuggageBig = False
 
-time = 15
+# time = 15
 
-hasAccess = money or ticket
-madeOnTime = time > 6 and time < 12
-luggageFits = not isLuggageBig
+# hasAccess = money or ticket
+# madeOnTime = time > 6 and time < 12
+# luggageFits = not isLuggageBig
 
-print(hasAccess and madeOnTime and luggageFits)
+# print(hasAccess and madeOnTime and luggageFits)
 
-print((money or ticket) and not isLuggageBig and (time > 6 and time < 12))
+# print((money or ticket) and not isLuggageBig and (time > 6 and time < 12))
+
+
