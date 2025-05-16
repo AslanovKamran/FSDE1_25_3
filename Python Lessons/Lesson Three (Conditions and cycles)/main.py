@@ -167,10 +167,68 @@
 #     print(weekDays[index])
 #     index -=1
 
+# for number in range(5, 11):
+#     print(number)
 
-rows = 5   # количество строк
-cols = 3   # количество столбцов
-for i in range(rows):  # Внешний цикл по строкам
-    for j in range(cols):  # Внутренний цикл по столбцам
-        print("🟦", end=" ")  # Печатаем звёздочку без перехода на новую строку
-    print()  # Переход на новую строку после завершения столбцов
+# rows = 5   # количество строк
+# cols = 3   # количество столбцов
+# for i in range(rows):  # Внешний цикл по строкам
+#     for j in range(cols):  # Внутренний цикл по столбцам
+#         print("🟦", end=" ")  # Печатаем звёздочку без перехода на новую строку
+#     print()  # Переход на новую строку после завершения столбцов
+
+
+# weekDays = ["Monday", "Tuesday",
+#             "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+# for day in weekDays[0:6:1]:
+#     print("🌞 ", day)
+
+
+# personFound = False
+
+# students = ["Valida", "Yayha", "Farhad", "Samir", "Ali",  "Cavid"]
+
+# for student in students:
+#     print("Checking the studnent:",student)
+#     if student == "Farhad":
+#         personFound = True
+#         break
+
+#     else:
+#         personFound = False
+
+
+# print("Person was found :", personFound)
+
+
+# pinCode = "4321"
+
+# while True:
+#     userPin = input("Type in your code 💳: ")
+#     if(userPin == pinCode):
+#         print("Correct ✔")
+#         break
+#     else:
+#         print("I won't let you out until you type a valid PIN 🛑")
+
+
+# for number in range(1, 11):
+#     if number % 2 == 0:
+#         continue
+#     print(number)
+
+
+# students = ["Valida", "Yayha", "Farhad", "Samir", "Ali",  "Cavid"]
+
+# for student in students:
+#     print("Checking the student 🎓:", student)
+#     if student == "Farhad":
+#         print("I found him 🙌")
+#         break
+
+# else:
+#     print("He is lost 😭")
+
+
+
