@@ -1,0 +1,268 @@
+# Task one
+# number_one = int(input("Type in the first number =>"))
+# operation = input("Type in of the + - / * operation => ")
+# number_two = int(input("Type in the second number =>"))
+
+# result = 0
+
+# if(operation == '+'):
+#     result = number_one + number_two
+# if(operation == '-'):
+#     result = number_one - number_two
+# if(operation == '*'):
+#     result = number_one * number_two
+# if(operation == '/'):
+#     if(number_two != 0):
+#         result = number_one / number_two
+#     else:
+#         print("Division by zero ❌")
+
+# print("Answer is",result)
+
+
+# Task 2
+# x = int(input("Input the first number => "))
+# y = int(input("Input the second number => "))
+# z = int(input("Input the third number => "))
+
+# maxNum = x
+# minNum = x
+
+# if y > maxNum:
+#     maxNum = y
+# if z > maxNum:
+#     maxNum = z
+
+# if y < minNum:
+#     minNum = y
+# if z < minNum:
+#     minNum = z
+
+# averageValue = x + y + z - minNum - maxNum
+
+# print("Minimum number =", minNum)
+# print("Maximum number =", maxNum)
+# print("Average value =", averageValue)
+
+
+# Task 3
+
+# number = int(input("Type in your number => "))
+
+# if (number % 3 == 0 and number % 5 == 0):
+#     print("Fizz Buzz")
+
+# elif (number % 3 == 0):
+#     print("Fizz")
+
+# elif (number % 5 == 0):
+#     print("Buzz")
+
+# else:
+#     print(number)
+
+
+# Task 4
+
+# Ввод уровня продаж
+# sales1 = int(input("Type in 1st manager sales in $ => "))
+# sales2 = int(input("Type in 2nd manager sales in $ => "))
+# sales3 = int(input("Type in 3rd manager sales in $ => "))
+
+# # 1st manager
+# if sales1 < 500:
+#     salary1 = 200 + sales1 * 0.03
+# elif sales1 <= 1000:
+#     salary1 = 200 + sales1 * 0.05
+# else:
+#     salary1 = 200 + sales1 * 0.08
+
+# # 2nd manager
+# if sales2 < 500:
+#     salary2 = 200 + sales2 * 0.03
+# elif sales2 <= 1000:
+#     salary2 = 200 + sales2 * 0.05
+# else:
+#     salary2 = 200 + sales2 * 0.08
+
+# # 3rd manager
+# if sales3 < 500:
+#     salary3 = 200 + sales3 * 0.03
+# elif sales3 <= 1000:
+#     salary3 = 200 + sales3 * 0.05
+# else:
+#     salary3 = 200 + sales3 * 0.08
+
+# # Defining the best one
+# best = 1
+# best_salary = salary1
+
+# if salary2 > best_salary:
+#     best = 2
+#     best_salary = salary2
+
+# if salary3 > best_salary:
+#     best = 3
+#     best_salary = salary3
+
+# # Awarding
+# if best == 1:
+#     salary1 += 200
+# elif best == 2:
+#     salary2 += 200
+# else:
+#     salary3 += 200
+
+# # Results
+# print("\nResults 📑:")
+# print("👨‍💼 Manager 1: $", salary1, "💰")
+# print("👨‍💼 Manager 2: $", salary2, "💰")
+# print("👨‍💼 Manager 3: $", salary3, "💰")
+# print("👑 MVP Manager: №", best)
+
+# Task 5
+
+# num = int(input("Type in the number between 100 and 999 => "))
+
+# hundreds = num // 100
+# tens = (num // 10) % 10
+# units = num % 10
+
+# total = hundreds + tens + units
+
+# if total % 2 == 0:
+#     print("Even")
+# else:
+#     print("Odd")
+
+
+# Task 6
+# num = int(input("Inpyt 6th digit num: "))
+
+# if 100_000 <= num <= 999_999:
+#     d1 = num // 100000
+#     d2 = (num // 10000) % 10
+#     d3 = (num // 1000) % 10
+#     d4 = (num // 100) % 10
+#     d5 = (num // 10) % 10
+#     d6 = num % 10
+
+#     sum1 = d1 + d2 + d3
+#     sum2 = d4 + d5 + d6
+
+#     if sum1 == sum2:
+#         print("Happy! 🎉")
+#     else:
+#         print("Not happy 😢.")
+
+# else:
+#     print("Not 6th digit number")
+
+
+# Task 1
+# length = int(input("What is the lenght 📏 => "))
+# symbol = input("What is the symbol 🔣 => ")
+
+# index = 1
+# while (index <= length):
+#     print(symbol, end='')
+#     index += 1
+
+
+# Task 2
+# a = int(input("First number => "))
+# b = int(input("Second number => "))
+
+# if (a > b):
+#     temp = b
+#     b = a
+#     a = temp
+
+# start = b
+# stop = a
+
+# print("Start", start)
+# print("Stop", stop)
+
+
+# for number in range(start, stop - 1, -1):
+#     if (number % 2 == 1):
+#         continue
+#     print(number, end=' | ')
+
+
+# Task 3
+# tries = 0
+# number_To_Guess = 42
+
+# while True:
+#     user_input = int(input("Type in your number => "))
+#     tries += 1
+
+#     if (user_input < number_To_Guess):
+#         print("Go up 👆")
+
+#     elif (user_input > number_To_Guess):
+#         print("Go down 👇")
+#     else:
+#         print(f"You guessed it right 🥳! Amount of tries = {tries}")
+#         guessed = True
+
+# Task 4
+
+# currentNumber = 1
+# result = 1
+
+# targetNumber = int(input("Input the target number => "))
+
+# if (targetNumber >= 10):
+#     print("Number is too big")
+
+# if (targetNumber < 0):
+#     targetNumber = -targetNumber
+
+
+# while (currentNumber <= targetNumber):
+#     result *= currentNumber
+#     currentNumber += 1
+
+# print(result)
+
+# Task 5
+# while True:
+
+#     print("1 for sum")
+#     print("2 for sub")
+#     print("3 for div")
+#     print("4 for exit")
+
+#     user_choice = int(input("What do you want? => "))
+
+#     if (user_choice == 1):
+#         num1 = int(input("Input your number => "))
+#         num2 = int(input("Input your number => "))
+#         print("Result = ", num1 + num2)
+
+#     elif (user_choice == 2):
+#         num1 = int(input("Input your number => "))
+#         num2 = int(input("Input your number => "))
+#         print("Result = ", num1 - num2)
+
+#     elif (user_choice == 3):
+#         num1 = int(input("Input your number => "))
+#         num2 = int(input("Input your number => "))
+#         print("Result = ", num1 / num2)
+
+#     elif (user_choice == 4):
+#         break
+#     else:
+#         print("Wrong choice")
+
+#     print("*"*100)
+
+# Task 6
+
+# for i in range(1, 11):
+#     for j in range(1, 11):
+#         print(f"{i} x {j} = {i*j}", end='\t')
+#     print("")
