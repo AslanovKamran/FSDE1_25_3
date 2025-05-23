@@ -160,7 +160,7 @@
 
 
 # Task 1
-# length = int(input("What is the lenght 📏 => "))
+# length = int(input("What is the length 📏 => "))
 # symbol = input("What is the symbol 🔣 => ")
 
 # index = 1

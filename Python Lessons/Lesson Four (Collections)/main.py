@@ -1,3 +1,6 @@
-sentence = 'Farhad and Valida and Mirjalal and Samir'
+age = input("Input your age => ")
 
-print(sentence.replace('and', 'with'))
+if(not age.isdigit()):
+    print("Нет такого возраста")
+else:
+    print("Go dalshe")

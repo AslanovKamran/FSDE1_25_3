@@ -232,3 +232,8 @@
 
 
 
+weekDays = ["Monday", "Tuesday",
+            "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+for day in weekDays[6:0:-1]:
+    print("🌞 ", day) 
