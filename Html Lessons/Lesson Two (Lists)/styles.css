@@ -1,0 +1,30 @@
+body {
+    font-family: 'Poppins';
+    /* background-color: rgb(0, 0, 0); */
+    /* color: ghostwhite; */
+    font-size: 24px;
+    border: 1px solid red;
+}
+
+
+/* ol {
+    list-style-type: decimal;
+    border: 2px dashed green;
+    border-radius: 10px;
+}
+
+ol li {
+    padding: 5px 0;
+}
+
+#softSkills>li {
+    color: red;
+}
+
+#hardSkills li {
+    color: rgb(232, 47, 205);
+} */
+
+#caucasian {
+    list-style-image: url('/images/Arrow.png');
+}
