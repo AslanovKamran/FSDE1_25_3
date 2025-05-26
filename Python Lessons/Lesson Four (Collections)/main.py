@@ -1,6 +1,12 @@
-age = input("Input your age => ")
+listOne = [10, 5, -3, -4, 4, 2]
 
-if(not age.isdigit()):
-    print("Нет такого возраста")
-else:
-    print("Go dalshe")
+indexesOfPositive = []
+positiveNumbers = []
+
+for element in listOne:
+    if (element > 0):
+        indexesOfPositive.append(listOne.index(element))
+        positiveNumbers.append(element)
+
+print(indexesOfPositive)
+positiveNumbers.sort()
