@@ -1,12 +1,8 @@
-listOne = [10, 5, -3, -4, 4, 2]
+import random
+balls = [1, 2, 3, 4, 5]
+draw = random.choices(balls, k=3)
 
-indexesOfPositive = []
-positiveNumbers = []
+print("Вытащенные шары:", draw)
 
-for element in listOne:
-    if (element > 0):
-        indexesOfPositive.append(listOne.index(element))
-        positiveNumbers.append(element)
 
-print(indexesOfPositive)
-positiveNumbers.sort()
+help(random.choices)
