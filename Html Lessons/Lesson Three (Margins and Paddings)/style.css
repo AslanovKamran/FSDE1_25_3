@@ -1,0 +1,41 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Poppins';
+}
+
+.product-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #2f3640;
+    background-image: url(./images/Bird.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-attachment: fixed;
+    border-radius: 50px;
+    height: 100vh;
+}
+
+
+.product-item__title {
+    width: 50%;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    background-color: #2f3640;
+    color: whitesmoke;
+    transition: all ease-in-out 0.3s;
+}
+
+.btn:hover {
+    scale: 0.95;
+    box-shadow: inset 0px 2px 5px 0px
+}
