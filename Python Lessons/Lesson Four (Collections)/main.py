@@ -1,13 +1,5 @@
-student = {
-    "name": "Ali",
-    "age": 20,
-    "city": "Baku"
-}
+t = ("text", [1, 2, 3])
 
-# print(student.keys())      # dict_keys(['name', 'city'])
-# print(student.values())    # dict_values(['Kamran', 'Baku'])
-# print(student.items())   # dict_items([('name', 'Kamran'), ('city', 'Baku')])
+t[1] = [3,2,1]
 
-keys = student.keys()
-
-print(keys)
+print(t)
