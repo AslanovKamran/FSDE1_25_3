@@ -1,8 +1,13 @@
-import random
-balls = [1, 2, 3, 4, 5]
-draw = random.choices(balls, k=3)
+student = {
+    "name": "Ali",
+    "age": 20,
+    "city": "Baku"
+}
 
-print("Вытащенные шары:", draw)
+# print(student.keys())      # dict_keys(['name', 'city'])
+# print(student.values())    # dict_values(['Kamran', 'Baku'])
+# print(student.items())   # dict_items([('name', 'Kamran'), ('city', 'Baku')])
 
+keys = student.keys()
 
-help(random.choices)
+print(keys)
