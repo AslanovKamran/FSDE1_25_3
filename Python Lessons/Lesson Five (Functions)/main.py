@@ -1,9 +1,9 @@
-def divideTwoNumbers(a,b):
-    if(b == 0):
-        print("Can't divide by zero")
-        return
-    
-    return a//b
+def getThePow(base, ceiling):
+    print(base ** ceiling)
 
-result = divideTwoNumbers(10,0)
-print(result)
+
+getThePow(base=5, ceiling=2)  # 25
+getThePow(ceiling=2, base=5)  # 25
+
+getThePow(5, 2)  # 25
+getThePow(2, 5)  # 32
