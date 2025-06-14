@@ -1,0 +1,103 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins';
+    background-color: black;
+    color: white;
+    letter-spacing: 3px;
+    font-size: 24px;
+}
+
+
+input {
+    background-color: black;
+    color: white;
+    border: none;
+    border-bottom: 1px solid white;
+    outline: none;
+}
+
+input:focus {
+    border-bottom: 1px dashed white;
+}
+
+.custom_link {
+    text-decoration: none;
+}
+
+.custom_link:hover {
+    border-bottom: 1px solid blue;
+}
+
+.custom_link:visited {
+    color: red;
+}
+
+.custom_link:active {
+    color: grey;
+}
+
+.button {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    border: 1px solid white;
+    padding: 10px 15px;
+    border-radius: 7px;
+}
+
+.button:hover {
+    background-color: white;
+    border-color: black;
+    color: black;
+}
+
+a {
+    color: cyan;
+}
+
+a:not([target="_blank"]) {
+    color: red;
+}
+
+.products {
+    border: 1px solir green;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.product__item {
+    height: 150px;
+    width: 150px;
+    background-color: rgb(117, 117, 205);
+}
+
+/* .product__item:first-child {
+    background-color: blueviolet;
+} */
+
+.product__item:nth-child(even) {
+    background-color: rgb(228, 94, 94);
+}
+
+/* .product__item:last-child {
+    background-color: goldenrod;
+} */
+
+
+a::after {
+    content: '👈';
+}
+
+a::before {
+    content: '@';
+}
+
+#this::selection {
+    background-color: grey;
+    color: green;
+}
