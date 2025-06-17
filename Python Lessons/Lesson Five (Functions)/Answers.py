@@ -37,6 +37,14 @@
 
 # longest_word("apple", "banana", "strawberry") ➝ "strawberry"
 
+# def longest_word(*args):
+#     theLongestWord = args[0]
+#     for element in args:
+#         if (len(element) > len(theLongestWord)):
+#             theLongestWord = element
+
+#     return theLongestWord
+
 
 # def longest_word(*args):
 #     theLongestWord = args[0]
@@ -51,13 +59,7 @@
 
 #     return theLongestWord
 
-# def longest_word(*args):
-#     theLongestWord = args[0]
-#     for element in args:
-#         if (len(element) > len(theLongestWord)):
-#             theLongestWord = element
 
-#     return theLongestWord
 
 
 # names = ["Ali", "Farhad", "Esmiralda", "Samir"]
@@ -120,19 +122,18 @@
 # 4. Price list
 # 5. Exit
 
-# def menu(title, *args):
+# def menu(*args, title):
 #     print(title)
 #     order = 1
 #     for option in args:
 #         print(f"{order}. {option}")
 #         order += 1
 
-
 # options = ["Book a place", "Reservations",
 #     "Food of the day", "Price list", "Exit"]
 
 # title = "Step it food"
-# menu(title, *options)
+# menu(*options, title=title)
 
 # 6. Вызов функции внутри функции
 # Описание:
@@ -172,7 +173,7 @@
 
 # def apply_all(*args, a, b):
 #     results = []
-#     for action in functions:
+#     for action in args:
 #         results.append(action(a, b))
 #     return results
 
@@ -222,6 +223,16 @@
 # Описание:
 # Функция unique_sorted_numbers(*args) должна:
 
+
+# 👉 Принять любое количество чисел;
+
+# 👉 Удалить повторы;
+
+# 👉 Отфильтровать нечётные;
+
+# 👉 Вернуть отсортированный список чётных чисел.
+
+
 # def unique_sorted_numbers(*args):
 #     uniqueNumbers = set(args)
 #     uniqueEvenNumbers = []
@@ -232,14 +243,6 @@
 
 
 # unique_sorted_numbers(1, 1, 3, 4, 5, 62, 4, 5, 1)
-
-# 👉 Принять любое количество чисел;
-
-# 👉 Удалить повторы;
-
-# 👉 Отфильтровать нечётные;
-
-# 👉 Вернуть отсортированный список чётных чисел.
 
 # 11.
 # Описание:
@@ -252,15 +255,15 @@
 # Так если я хочу выйти из Баку и через несколько городов вернуться домой, то:
 # Route: Baku → Ganja → Sheki → Home
 
-def build_route(*points, start, end="Home"):
-    print(start, end=" → ")
-    for point in points:
-        print(point, end=' → ')
-    print(end)
+# def build_route(*points, start, end="Home"):
+#     print(start, end=" → ")
+#     for point in points:
+#         print(point, end=' → ')
+#     print(end)
 
 
-points = ["Sheki", "Ganja", "Lenkaran", "Astara", "Lerik"]
-build_route("Sheki", "Ganja", start="Baku", end="Baku")
+# points = ["Sheki", "Ganja", "Lenkaran", "Astara", "Lerik"]
+# build_route("Sheki", "Ganja", start="Baku", end="Baku")
 
 
 # 12 Перевести десятичное число в 2чное
