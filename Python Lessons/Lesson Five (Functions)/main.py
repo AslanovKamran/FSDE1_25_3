@@ -1,5 +1,15 @@
-number =11
+def greeter(language:str):
+    def sayHello(name:str):
+        if(language == 'en'):
+            return f"Hi, {name}"
+        elif(language == 'ru'):
+            return f"Привет, {name}"
+        elif(language == 'az'):
+            return f"Salam, {name}"
+        else:
+            return f"👋 {name}"
+    return sayHello
 
-result = "Even" if number % 2 == 0 else "Odd"
-
+englishGreeter = greeter('ru')
+result = englishGreeter("John")
 print(result)
