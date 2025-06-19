@@ -1,15 +1,11 @@
-def greeter(language:str):
-    def sayHello(name:str):
-        if(language == 'en'):
-            return f"Hi, {name}"
-        elif(language == 'ru'):
-            return f"Привет, {name}"
-        elif(language == 'az'):
-            return f"Salam, {name}"
-        else:
-            return f"👋 {name}"
-    return sayHello
+def make_length_validator (min_length, max_length):
+    def validator(str):
+        return min_length <= len(str) <= max_length
+    return validator
 
-englishGreeter = greeter('ru')
-result = englishGreeter("John")
-print(result)
+validator = make_length_validator(3,6)
+
+print(validator("hi"))
+print(validator("hello"))
+print(validator("salam aleykum"))
+
