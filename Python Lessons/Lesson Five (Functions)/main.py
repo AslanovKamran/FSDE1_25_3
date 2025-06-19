@@ -1,11 +1,6 @@
-def make_length_validator (min_length, max_length):
-    def validator(str):
-        return min_length <= len(str) <= max_length
-    return validator
+number = 11
+isEven = True if number%2 == 0 else False
 
-validator = make_length_validator(3,6)
+isPositive = True if number > 0 else False
 
-print(validator("hi"))
-print(validator("hello"))
-print(validator("salam aleykum"))
-
+print(isPositive)
