@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>z-index property in perspective</title>
+    <style>
+        .wrapper {
+            font-family: sans-serif;
+            font-size: 20px;
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+            position: relative;
+            perspective: 600px;
+        }
+
+        .pos {
+            position: absolute;
+            width: 170px;
+            height: 220px;
+            text-align: center;
+            padding: 15px;
+            border: 3px double rgb(106, 148, 190);
+            background-color: rgba(204, 221, 238, 0.73);
+            box-shadow: 0 0 12px 3px rgba(0, 0, 0, 0.45);
+            transform: rotateY(15deg);
+        }
+
+        .pos1 {
+            left: 47%;
+            top: 190px;
+            z-index: 2;
+        }
+
+        .pos2 {
+            left: 28%;
+            top: 80px;
+        }
+
+        .pos3 {
+            left: 20%;
+            top: 20px;
+            z-index: -1;
+        }
+
+        .pos4 {
+            left: 36%;
+            top: 140px;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="pos pos1">z-index: 2</div>
+    <div class="pos pos2">z-index: auto;</div>
+    <div class="pos pos3">z-index: -1</div>
+    <div class="pos pos4">z-index: 1</div>
+</div>
+</body></html>

@@ -1,0 +1,52 @@
+* {
+    font-family: 'Poppins';
+}
+
+body {
+    background: black;
+    color: white;
+}
+
+.wrapper {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.sticker {
+    height: 150px;
+    width: 150px;
+    background-color: rgb(232, 232, 127);
+    transition: all ease-in 0.2s;
+    animation: fadeInScale ease-in-out 0.5s;
+}
+
+.sticker:hover {
+    transform: translateY(-5px);
+}
+
+button {
+    margin-top: 20px;
+    outline: none;
+    border: 1px solid rgb(232, 232, 127);
+    background: none;
+    color: whitesmoke;
+    font-size: 24px;
+    padding: 10px 15px;
+    cursor: pointer;
+
+}

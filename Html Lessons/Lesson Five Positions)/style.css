@@ -1,0 +1,104 @@
+* {
+    font-family: 'poppins';
+    background-color: black;
+    color: white;
+    font-size: 24px;
+    letter-spacing: 5px;
+    line-height: 50px;
+}
+
+/* .box-1 {
+    padding: 40px;
+    background-color: lightcoral;
+    margin-bottom: 4px;
+}
+
+.box-2 {
+    padding: 40px;
+    background-color: lightgreen;
+    margin-bottom: 4px;
+    position: relative;
+}
+
+.box-3 {
+    padding: 40px;
+    background-color: lightseagreen;
+    margin-bottom: 4px;
+    position: absolute;
+
+}
+
+.box-4 {
+    padding: 40px;
+    background-color: purple;
+} */
+
+
+/* .box {
+    height: 100px;
+    background-color: limegreen;
+    position: relative;
+    margin-top: 10px;
+    width: 200px;
+}
+
+.close {
+    background-color: red;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.maximize {
+    position: absolute;
+    top: 0px;
+    right: 21px;
+    background-color: transparent;
+}
+
+.minimize {
+    position: absolute;
+    top: 0px;
+    right: 42px;
+    background-color: transparent;
+} */
+/* 
+.modal {
+    background-color: white;
+    border: 1px solid black;
+    text-align: center;
+    color: black;
+    width: 450px;
+    padding: 30px;
+    position: fixed;
+    top: 100px;
+    left: 500px;
+} */
+
+.btn {
+    outline: none;
+    border: 1px solid white;
+    padding: 10px;
+    width: 300px;
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
+    position: relative;
+}
+
+.btn:hover {
+    border-radius: 14px;
+}
+
+.btn::after {
+    position: absolute;
+    content: '>';
+    top: 13px;
+    right: 50px;
+    transition: all ease-in-out 0.3s;
+    opacity: 0;
+}
+
+.btn:hover::after {
+    right: 30px;
+    opacity: 1;
+}
