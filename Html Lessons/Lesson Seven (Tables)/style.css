@@ -1,0 +1,20 @@
+* {
+    font-family: monospace;
+    font-size: 34px;
+}
+
+table {
+    border: 1px solid black;
+}
+
+td,
+th {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+tr td:nth-child(even),
+th:nth-child(even) {
+    background-color: aqua;
+}
