@@ -1,17 +1,7 @@
-def validate_age(age):
-    if age < 0:
-        raise ArithmeticError("Возраст не может быть отрицательным.")
-    print(f"Возраст принят: {age}")
-
-
-def get_user_age():
-    try:
-        age = int(input("Введите возраст: "))
-        validate_age(age)
-    except ArithmeticError as e:
-        print(f"Ошибка: {e}")
-    except ValueError as e:
-        print(f"Ошибка: {e}")
-
-
-get_user_age()
+try:
+    number1 = 10
+    number2 = 0
+    result = number1 // number2
+    print(result)
+except Exception as e:
+    print(f"Exception was thrown: {e}")
