@@ -347,7 +347,7 @@ sizeof - оператор, используемый для вывода разм
 
     bool isDuplicate;
 
-    for (int i = 0; i < Count;)
+    for (int i = 0; i < Count; i++)
     {
     	isDuplicate = false;
     	int randomNumber = rand() % 20;
