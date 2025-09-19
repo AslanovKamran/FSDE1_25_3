@@ -1,0 +1,93 @@
+class Task
+{
+private:
+
+	string description;
+	bool completed;
+
+public:
+	Task()
+	{
+
+	}
+	Task(string desc)
+	{
+		description = desc;
+		completed = false;
+	}
+
+	string getDescription()
+	{
+		return description;
+	}
+	bool isCompleted()
+	{
+		return completed;
+	}
+
+	void setDescription(string desc)
+	{
+		description = desc;
+	}
+	//No need for a setCompleted function, we can use markCompleted and markIncomplete instead
+
+	void markCompleted()
+	{
+		completed = true;
+	}
+	void markIncomplete()
+	{
+		completed = false;
+	}
+	void display()
+	{
+		cout << (completed ? "[X] " : "[ ] ") << description << endl;
+	}
+
+};
+
+class TaskList
+{
+private:
+	int taskCount;
+	Task* tasks;
+
+public:
+	
+	TaskList()
+	{
+		tasks = nullptr;
+		taskCount = 0;
+	}
+	~TaskList()
+	{
+		delete[] tasks;
+	}
+
+	void AddTask(Task t)
+	{
+		Task* temp = new Task[taskCount + 1];
+		for (int i = 0; i < taskCount; i++)
+		{
+			temp[i] = tasks[i];
+		}
+		temp[taskCount] = t;
+		delete[] tasks;
+		tasks = temp;
+		taskCount++;
+	}
+	void DisplayTasks()
+	{
+		for (int i = 0; i < taskCount; i++)
+		{
+			tasks[i].display();
+		}
+	}
+	void MarkTaskCompleted(int index)
+	{
+		if (index >= 0 && index < taskCount)
+		{
+			tasks[index].markCompleted();
+		}
+	}
+};
