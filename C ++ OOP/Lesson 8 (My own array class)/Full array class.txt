@@ -1,0 +1,188 @@
+
+class IntArray
+{
+
+private:
+
+	int* arr = nullptr;
+	int size = 0;
+
+public:
+
+	IntArray() {}
+	~IntArray()
+	{
+		delete[] arr;
+	}
+	IntArray(const IntArray& other)
+	{
+		size = other.size;
+		if (size > 0)
+		{
+			arr = new int[size];
+			for (int i = 0; i < size; i++)
+			{
+				arr[i] = other.arr[i];
+			}
+		}
+		else
+		{
+			arr = nullptr;
+		}
+	}
+
+	void pushBack(int data)
+	{
+		int* newArr = new int[size + 1];
+		for (int i = 0; i < size; i++)
+		{
+			newArr[i] = arr[i];
+		}
+		newArr[size] = data;
+		delete[] arr;
+		arr = newArr;
+		size++;
+	}
+	int get(int position)
+	{
+		if (position < 0 || position >= size)
+		{
+			//Need to throw an exception here
+			cout << ("Index out of range");
+		}
+		return arr[position];
+	}
+	int getSize()
+	{
+		return size;
+	}
+	void set(int data, int position)
+	{
+		if (position < 0 || position >= size)
+		{
+			//Need to throw an exception here
+			cout << ("Index out of range");
+		}
+		arr[position] = data;
+	}
+	void insert(int data, int position)
+	{
+		if (position < 0 || position > size)
+		{
+			//Need to throw an exception here
+			cout << ("Index out of range");
+		}
+
+		int* newArr = new int[size + 1];
+		for (int i = 0; i < position; i++)
+		{
+			newArr[i] = arr[i];
+		}
+		newArr[position] = data;
+		for (int i = position; i < size; i++)
+		{
+			newArr[i + 1] = arr[i];
+		}
+		delete[] arr;
+		arr = newArr;
+		size++;
+	}
+	void removeAt(int position) 
+	{
+		if (position < 0 || position >= size)
+		{
+			//Need to throw an exception here
+			cout << ("Index out of range");
+		}
+		int* newArr = new int[size - 1];
+		for (int i = 0; i < position; i++)
+		{
+			newArr[i] = arr[i];
+		}
+		for (int i = position + 1; i < size; i++)
+		{
+			newArr[i - 1] = arr[i];
+		}
+		delete[] arr;
+		arr = newArr;
+		size--;
+	}
+	void removeAll(int data)
+	{
+		int count = 0;
+		for (int i = 0; i < size; i++)
+		{
+			if (arr[i] == data)
+			{
+				count++;
+			}
+		}
+		if (count == 0)
+		{
+			return;
+		}
+
+		int* newArr = new int[size - count];
+		int j = 0;
+		for (int i = 0; i < size; i++)
+		{
+			if (arr[i] != data)
+			{
+				newArr[j] = arr[i];
+				j++;
+			}
+		}
+		delete[] arr;
+		arr = newArr;
+		size -= count;
+	}
+	int indexOf(int data)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (arr[i] == data)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+	void sort(bool ascending = true)
+	{
+		for (int i = 0; i < size - 1; i++)
+		{
+			for (int j = 0; j < size - i - 1; j++)
+			{
+				if (ascending)
+				{
+					if (arr[j] > arr[j + 1])
+					{
+						int temp = arr[j];
+						arr[j] = arr[j + 1];
+						arr[j + 1] = temp;
+					}
+				}
+				else
+				{
+					if (arr[j] < arr[j + 1])
+					{
+						int temp = arr[j];
+						arr[j] = arr[j + 1];
+						arr[j + 1] = temp;
+					}
+				}
+			}
+		}
+	}
+	void clear()
+	{
+		delete[] arr;
+		arr = nullptr;
+		size = 0;
+	}
+};
+
+int main()
+{
+		
+}

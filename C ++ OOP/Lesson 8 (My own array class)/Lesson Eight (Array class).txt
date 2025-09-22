@@ -1,0 +1,608 @@
+Класс Array
+
+Постараемся написать свой собственный класс для работы с динамической памятью и в основном с массивами. В дальнейшем мы сможем подключить данный класс в любой наш проект и пользоваться им. 
+
+Вспомним класс TaskList. Там для добавления нового Task-a в массив задач мы сами перераспределяли память и занимались копированием данных. И данные манипуляции мы будем делать не только в этом классе. Это общий функционал для любого класса, работающего с динамической памятью.
+
+Попытаемся упростить нашу жизнь и создадим класс, задачей которго будет управление данной памятью. 
+
+Назовем этот класс IntArray. Он будет предназначен для работы с массивами целых чисел, а потом сделаем его универсальным, чтобы он мог работать с любыми типами данных.
+
+Этот класс возмет на себя рутинную задачу перераспределения памяти и работу с памятью. 
+
+Что нужно учесть в самом начале:
+
+У нас должны быть конструкторы: дефотный - чтобы я мог создать пустой массив, а также деструктор - чтобы при удалении объекта не получить утеску памяти. Из золотого правила также следует, что я также должен переписать и конструктор копирования, чтобы избежать проблему shallow copy.
+
+    сlass IntArray
+    {
+        ctor
+        copy_ctor
+        destructor
+    }
+
+Разберемся с методами. 
+
+➕ Самым часто используемым методом является добавление элемента в конец массива. назовем его pushBack. Для вставки в произвольную позицию будем использовать метод insert.
+
+    pushBack(int data);
+    insert(int data, int position);
+
+🫳 Для того, чтобы достать элемент по указанному элементу будем использовать метод get
+
+    get(int position);
+
+ 💱Для изменения значения элемента будем использовать метод set
+    
+    void set(int data, int position)
+    {
+        arr[position] = data;        
+    }
+
+🗑️ Разберемся теперь с удалением данных. В основном их два: метод remove, который удаляет все вхождения заданного элемента в массив и более распространенный removeAt - метод, удаляющий элемент по индексу.
+
+    remove(int data);
+    removeAt(int position);
+
+🧺 Неотъемлемой частью всех массивов является их размер. Следовательно нам нужен метод, который нам будет возвращать его кол-во элементов массива
+
+    getSize();
+
+🔍 Такде обязательно нам нужен метод поиска элемента в массиве
+
+    indexOf(int data);
+
+который нам врзвращает:
+
+    индекс первого вхождения элемента при его наличии
+    -1, при отстутсвии элемента
+
+💡 Также в дополнение к этому можно создать методы, очищающие и сортирующие массив:
+
+    clear();
+    sort();
+
+🧠 Вот так будет выглядеть схема нашего класса:
+
+
+    class IntArray 
+    {
+        ctor;
+        copy_ctor;
+        destructor;
+
+        pushBack(int data);
+        insert(int data, int position);
+
+        remove(int data);
+        removeAt(int position);
+
+        getSize();
+        get(int position);
+
+        set(int data, int position);
+
+        indexOf(int data);
+    };
+
+
+Осталось теперь разобраться с полями нашего класса. Очевидно, что нам нужен указатель на сам массив а также поле которое будет хранить кол-во элементов в этом массиве. Можем также прописать здесь начальные значения.
+
+
+private:
+	int* arr = nullptr;
+	int size = 0;
+
+Их также можно было бы и прописать в конструкторе по умолчанию.
+
+Обязательно нужно прописать деструктор, который просто будет освобождать динамическую память и конструктор копирования, делающий глубокое копирование
+
+    IntArray() {}
+    ~IntArray()
+    {
+        delete[] arr;
+    }
+    IntArray(const IntArray& other)
+    {
+        size = other.size;
+        if (size > 0)
+        {
+            arr = new int[size];
+            for (int i = 0; i < size; i++)
+            {
+                arr[i] = other.arr[i];
+            }
+        }
+        else
+        {
+            arr = nullptr;
+        }
+    }
+
+
+Далее попробуем написать наш первый метод pushBack.
+
+    void pushBack(int data) 
+    {
+        int* newArr = new int[size + 1];
+        for (int i = 0; i < size; i++) 
+        {
+            newArr[i] = arr[i];
+        }
+        newArr[size] = data;
+        delete[] arr;
+        arr = newArr;
+        size++;
+    }
+
+
+Теперь я хочу проверить работает ли мой класс. Для этого я пропишу тело для методов get и getSize, чтобы сначала вставить, а потом прочесть элементы в массиве:
+
+
+    int get(int position) 
+    {
+        if (position < 0 || position >= size) 
+        {
+            //Need to throw an exception here
+            cout<<("Index out of range");
+        }
+        return arr[position];
+    }
+
+    int getSize()
+    {
+        return size;        
+    }
+
+Также сразу можно определить и set 
+
+    void set(int data, int position) 
+    {
+        if (position < 0 || position >= size)
+        {
+            //Need to throw an exception here
+            cout << ("Index out of range");
+        }
+        arr[position] = data;
+    }
+
+И в main проверим данный функционал
+
+
+    int main()
+    {
+        IntArray arr = IntArray();
+        arr.pushBack(5);
+        arr.pushBack(10);
+        arr.pushBack(15);
+        cout << arr.get(0) << endl;
+        cout << arr.get(1) << endl;
+        cout << arr.get(2) << endl;
+    }
+
+Все работает как надо.
+
+💡Тут можно увидеть важность наличия деструктора в нашем классе. Закомментируем его и в бесконечном цикле будем создавать объекты класса IntArray
+
+    while (1)
+    {
+        IntArray arr = IntArray();
+        arr.pushBack(5);
+        arr.pushBack(10);
+        arr.pushBack(15);
+    }
+
+В TaskManager-e можно посмотреть затраты памяти, видно как график скачет наверх. Но если вернуть деструктор на место, то в конце каждой итерации память очищается.
+
+Далее рассмотрим метод insert, который вставляет элемент в указанную позицию:
+
+    void insert(int data, int position) 
+    {
+        if (position < 0 || position > size)
+        {
+            //Need to throw an exception here
+            cout << ("Index out of range");
+        }
+        int* newArr = new int[size + 1];
+        for (int i = 0; i < position; i++)
+        {
+            newArr[i] = arr[i];
+        }
+        newArr[position] = data;
+        for (int i = position; i < size; i++)
+        {
+            newArr[i + 1] = arr[i];
+        }
+        delete[] arr;
+        arr = newArr;
+        size++;
+    }
+
+
+Рассмотрим теперь методы для удаления элемента из массива. Начнем с простого - удалим элемент по позиции.
+
+    void removeAt(int position) 
+    {
+        if (position < 0 || position >= size)
+        {
+            //Need to throw an exception here
+            cout << ("Index out of range");
+        }
+        int* newArr = new int[size - 1];
+        for (int i = 0; i < position; i++)
+        {
+            newArr[i] = arr[i];
+        }
+        for (int i = position + 1; i < size; i++)
+        {
+            newArr[i - 1] = arr[i];
+        }
+        delete[] arr;
+        arr = newArr;
+        size--;
+    }
+
+И проверим функционал:
+
+    IntArray arr = IntArray();
+    arr.pushBack(5);
+    arr.pushBack(10);
+    arr.pushBack(15);
+    arr.pushBack(20);
+    arr.pushBack(25);
+
+    arr.removeAt(0);
+
+    int size = arr.getSize();
+    for (int i = 0; i < size; i++)
+    {
+        cout << arr.get(i) << " ";
+    }
+
+Далее удалим все вхождения опреденного элемента
+
+    void removeAll(int data)
+    {
+        int count = 0;
+        for (int i = 0; i < size; i++)
+        {
+            if (arr[i] == data)
+            {
+                count++;
+            }
+        }
+        if (count == 0)
+        {
+            return;
+        }
+
+        int* newArr = new int[size - count];
+        int j = 0;
+        for (int i = 0; i < size; i++)
+        {
+            if (arr[i] != data)
+            {
+                newArr[j] = arr[i];
+                j++;
+            }
+        }
+        delete[] arr;
+        arr = newArr;
+        size -= count;
+    }
+
+
+Резберемся теперь с поиском элемента в массиве. Напишем тело для ф-ции indexOf
+
+    int indexOf(int data)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if (arr[i] == data)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+Теперь сделаем сортировку
+
+    void sort(bool ascending = true)
+    {
+        for (int i = 0; i < size - 1; i++)
+        {
+            for (int j = 0; j < size - i - 1; j++)
+            {
+                if (ascending)
+                {
+                    if (arr[j] > arr[j + 1])
+                    {
+                        int temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                    }
+                }
+                else
+                {
+                    if (arr[j] < arr[j + 1])
+                    {
+                        int temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                    }
+                }
+            }
+        }
+    }
+
+И наконец метод clear, очищающий массив:
+
+    void clear()
+    {
+        delete[] arr;
+        arr = nullptr;
+        size = 0;
+    }
+
+
+Осталось минимум - сделать наш класс шаблонным, для работы с любым типом данных, а также использовать его в другом классе, для работы с массивом.
+
+Начнем с первого. Для этого воспользуемся лдючевым словом template и заменим все необходимые int на T.
+
+
+И теперь можно использовать данный класс массив в случаях когда нам в классе нужна работа с массивом
+
+
+template<typename T>
+class MyArray
+{
+
+private:
+
+	T* arr = nullptr;
+	int size = 0;
+
+public:
+
+	MyArray() {}
+	~MyArray()
+	{
+		delete[] arr;
+	}
+	MyArray(const MyArray& other)
+	{
+		size = other.size;
+		if (size > 0)
+		{
+			arr = new T[size];
+			for (int i = 0; i < size; i++)
+			{
+				arr[i] = other.arr[i];
+			}
+		}
+		else
+		{
+			arr = nullptr;
+		}
+	}
+
+	void pushBack(T data)
+	{
+		T* newArr = new T[size + 1];
+		for (int i = 0; i < size; i++)
+		{
+			newArr[i] = arr[i];
+		}
+		newArr[size] = data;
+		delete[] arr;
+		arr = newArr;
+		size++;
+	}
+	T get(int position)
+	{
+		if (position < 0 || position >= size)
+		{
+			//Need to throw an exception here
+			cout << ("Index out of range");
+		}
+		return arr[position];
+	}
+	int getSize()
+	{
+		return size;
+	}
+	void set(T data, int position)
+	{
+		if (position < 0 || position >= size)
+		{
+			//Need to throw an exception here
+			cout << ("Index out of range");
+		}
+		arr[position] = data;
+	}
+	void insert(int T, int position)
+	{
+		if (position < 0 || position > size)
+		{
+			//Need to throw an exception here
+			cout << ("Index out of range");
+		}
+
+		T* newArr = new T[size + 1];
+		for (int i = 0; i < position; i++)
+		{
+			newArr[i] = arr[i];
+		}
+		newArr[position] = data;
+		for (int i = position; i < size; i++)
+		{
+			newArr[i + 1] = arr[i];
+		}
+		delete[] arr;
+		arr = newArr;
+		size++;
+	}
+	void removeAt(int position)
+	{
+		if (position < 0 || position >= size)
+		{
+			//Need to throw an exception here
+			cout << ("Index out of range");
+		}
+		T* newArr = new T[size - 1];
+		for (int i = 0; i < position; i++)
+		{
+			newArr[i] = arr[i];
+		}
+		for (int i = position + 1; i < size; i++)
+		{
+			newArr[i - 1] = arr[i];
+		}
+		delete[] arr;
+		arr = newArr;
+		size--;
+	}
+	void removeAll(T data)
+	{
+		int count = 0;
+		for (int i = 0; i < size; i++)
+		{
+			if (arr[i] == data)
+			{
+				count++;
+			}
+		}
+		if (count == 0)
+		{
+			return;
+		}
+
+		T* newArr = new T[size - count];
+		int j = 0;
+		for (int i = 0; i < size; i++)
+		{
+			if (arr[i] != data)
+			{
+				newArr[j] = arr[i];
+				j++;
+			}
+		}
+		delete[] arr;
+		arr = newArr;
+		size -= count;
+	}
+	int indexOf(T data)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (arr[i] == data)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+	void sort(bool ascending = true)
+	{
+		for (int i = 0; i < size - 1; i++)
+		{
+			for (int j = 0; j < size - i - 1; j++)
+			{
+				if (ascending)
+				{
+					if (arr[j] > arr[j + 1])
+					{
+						T temp = arr[j];
+						arr[j] = arr[j + 1];
+						arr[j + 1] = temp;
+					}
+				}
+				else
+				{
+					if (arr[j] < arr[j + 1])
+					{
+						T temp = arr[j];
+						arr[j] = arr[j + 1];
+						arr[j + 1] = temp;
+					}
+				}
+			}
+		}
+	}
+	void clear()
+	{
+		delete[] arr;
+		arr = nullptr;
+		size = 0;
+	}
+};
+
+
+И накоец рассмотрим, то как можно использовать наш класс в другом.
+
+Сделаем Student, у которого будут:
+
+    имя (string name)
+
+    оценки (Array<double> grades)
+
+    методы: добавить оценку, посчитать средний балл, вывести информацию.
+
+
+
+class Student
+{
+private:
+    string name;
+    Array<double> grades;
+
+public:
+    Student(string n) : name(n) {}
+
+    void addGrade(double grade)
+    {
+        grades.pushBack(grade);
+    }
+
+    double getAverage() const
+    {
+        if (grades.getSize() == 0)
+            return 0.0;
+
+        double sum = 0;
+        int size = grades.getSize()
+        for (int i = 0; i < size; i++)
+        {
+            sum += grades.get(i);
+        }
+        return sum / grades.getSize();
+    }
+
+    void showInfo() const
+    {
+        cout << "Student: " << name << endl;
+        cout << "Grades: ";
+        int size = grades.getSize();
+        for (int i = 0; i < size; i++)
+        {
+            cout << grades.get(i) << " ";
+        }
+        cout << endl;
+        cout << "Average grade: " << fixed << setprecision(2) << getAverage() << endl; // need to use iomanip
+    }
+};
+
+
+int main()
+{
+    Student s1("John Doe");
+
+    s1.addGrade(90.5);
+    s1.addGrade(75.0);
+    s1.addGrade(82.3);
+
+    s1.showInfo();
+
+    return 0;
+}
