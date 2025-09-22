@@ -1,0 +1,60 @@
+Реализовать класс MyString
+Можно использовать стандартные ф-ции из cstring типа strcpy и т.п.
+
+class MyString
+{
+private:
+	char* str;
+	int size;
+
+public:
+	MyString(){} 					//default constructor
+	~MyString(){...} 				//destructor
+	MyString(const MyString& other){...}		//copy constructor
+
+
+	void concat(const char* text)
+	{
+		//Приклеивает к текущей строке строку text
+	}
+	void concat(MyString text)
+	{
+		//Приклеивает к текущей строке строку text
+	}
+
+	void concat(const char* text)
+	{
+		//Заменить одну строку другой
+	}
+	void concat(MyString text)
+	{
+		//Заменить одну строку другой
+	}
+
+	int compare(const char* text)
+	{
+		//Лексеграфическое сравнение строк
+	}
+	int compare(MyString text)
+	{
+		//Лексеграфическое сравнение строк
+	}
+
+	int getSize()
+	{
+		//Получить размер строки
+	}
+
+	const char* getString()
+	{
+		//Получить строку
+	}
+	
+	
+};
+
+Псевдо код:
+
+1) "Hello".concat(" World") -> "Hello world";
+2) "Hello".replace("Salam") -> "Salam";
+3) "A".compare("B") -> -1; "B".compare("A") -> 1; "A".compare("A") -> 0; 
