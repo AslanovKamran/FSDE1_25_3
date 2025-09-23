@@ -1,0 +1,47 @@
+class Money
+{
+private:
+
+	int banknotes = 0;
+	int cents = 0;
+
+public:
+
+	Money() {}
+	Money(int b, int c){ banknotes = b; cents = c;}
+	
+	int getBanknotes() const { return banknotes; }
+	int getCents() const { return cents; }
+
+	Money operator+(const Money& m2)
+	{
+		int totalCents = this->cents + m2.cents;
+		int totalBanknotes = this->banknotes + m2.banknotes + totalCents / 100;
+		totalCents = totalCents % 100;
+		return Money(totalBanknotes, totalCents);
+	}
+	Money operator+(float amount)
+	{
+		int addBanknotes = (int)(amount);
+		int addCents = (int)((amount - addBanknotes) * 100);
+
+		int totalCents = this->cents + addCents;
+		int totalBanknotes = this->banknotes + addBanknotes + totalCents / 100;
+		
+		totalCents = totalCents % 100;
+		
+		return Money(totalBanknotes, totalCents);
+	}
+	bool operator==(const Money& m2)
+	{
+		return (this->banknotes == m2.banknotes) && (this->cents == m2.cents);
+	}
+
+};
+
+
+ostream& operator<<(ostream& out, const Money& m)
+{
+	out << "Banknotes: " << m.getBanknotes() << ", Cents: " << m.getCents() << endl;
+	return out;
+}
