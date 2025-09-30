@@ -1,0 +1,68 @@
+Практическое задание: Менеджер проектов
+🎯 Цель
+
+Научиться:
+
+    использовать указатель this для доступа к полям объекта;
+    проектировать классы с понятной структурой;
+    разделять классы по файлам (.h и .cpp);
+
+🛠 Постановка задачи
+
+Нужно реализовать систему управления проектами.
+В ней есть 2 класса:
+
+📄 WorkItem
+
+Поля:
+
+• string description — описание задачи,
+• bool completed — статус.
+
+Методы:
+
+• void markCompleted(),
+• void markIncomplete(),
+• void display().
+
+
+📄 TeamMember
+
+Поля:
+
+    • string name,
+    • WorkItem* items,
+    • int itemCount.
+
+Методы:
+
+    •  void assignItem(WorkItem item)
+    •  void displayItems()
+
+Каждый класс хранится в отдельном .h и .cpp файле.
+В main.cpp будет тестовый сценарий.
+
+
+📌 Прмер использования в main
+
+#include "WorkItem.h"
+#include "TeamMember.h" 
+
+int main() {
+    TeamMember alice("Alice");
+    TeamMember bob("Bob");
+
+    alice.assignItem(WorkItem("Write proposal"));
+    alice.assignItem(WorkItem("Review dataset"));
+
+    bob.assignItem(WorkItem("Train model"));
+    bob.assignItem(WorkItem("Prepare presentation"));
+
+    alice.displayItems();
+    bob.displayItems();
+
+    return 0;
+}
+
+👉 Использовать this-> при работе с полями.
+👉 Разделение на .h и .cpp
