@@ -1,0 +1,220 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+class MyList {
+private:
+    Node* head = nullptr;
+    Node* tail = nullptr;
+    int size = 0;
+
+public:
+    // ✅ Деструктор
+    ~MyList() {
+        clear();
+    }
+
+    // ✅ Добавить элемент в конец списка
+    void pushBack(int data) {
+        Node* newNode = new Node();
+        newNode->data = data;
+        newNode->next = nullptr;
+
+        if (head == nullptr) {
+            head = tail = newNode;
+        } else {
+            tail->next = newNode;
+            tail = newNode;
+        }
+
+        size++;
+    }
+
+    // ✅ Вставка элемента в заданную позицию (по умолчанию в начало)
+    void insert(int data, int position = 0) {
+        if (position < 0 || position > size) {
+            cout << "Invalid position!\n";
+            return;
+        }
+
+        Node* newNode = new Node();
+        newNode->data = data;
+
+        if (position == 0) {
+            newNode->next = head;
+            head = newNode;
+
+            if (size == 0) {
+                tail = newNode;
+            }
+        } else {
+            Node* current = head;
+            for (int i = 0; i < position - 1; ++i) {
+                current = current->next;
+            }
+
+            newNode->next = current->next;
+            current->next = newNode;
+
+            if (newNode->next == nullptr) {
+                tail = newNode;
+            }
+        }
+
+        size++;
+    }
+
+    // ✅ Получить элемент по индексу
+    int getAt(int position) {
+        if (position < 0 || position >= size) {
+            cout << "Invalid position!\n";
+            return -1;
+        }
+
+        Node* current = head;
+        for (int i = 0; i < position; ++i) {
+            current = current->next;
+        }
+
+        return current->data;
+    }
+
+    // ✅ Получить размер списка
+    int getSize() {
+        return size;
+    }
+
+    // ✅ Удалить элемент по позиции
+    void removeAt(int position) {
+        if (position < 0 || position >= size) {
+            cout << "Invalid position!\n";
+            return;
+        }
+
+        Node* toDelete;
+
+        if (position == 0) {
+            toDelete = head;
+            head = head->next;
+
+            if (size == 1) {
+                tail = nullptr;
+            }
+        } else {
+            Node* current = head;
+            for (int i = 0; i < position - 1; ++i) {
+                current = current->next;
+            }
+
+            toDelete = current->next;
+            current->next = toDelete->next;
+
+            if (toDelete == tail) {
+                tail = current;
+            }
+        }
+
+        delete toDelete;
+        size--;
+    }
+
+    // ✅ Удалить первое вхождение по значению
+    void removeFirst(int data) {
+        if (head == nullptr) {
+            cout << "List is empty!\n";
+            return;
+        }
+
+        Node* current = head;
+        Node* previous = nullptr;
+
+        while (current != nullptr && current->data != data) {
+            previous = current;
+            current = current->next;
+        }
+
+        if (current == nullptr) {
+            cout << "Value not found!\n";
+            return;
+        }
+
+        if (current == head) {
+            head = head->next;
+            if (size == 1) {
+                tail = nullptr;
+            }
+        } else {
+            previous->next = current->next;
+            if (current == tail) {
+                tail = previous;
+            }
+        }
+
+        delete current;
+        size--;
+    }
+
+    // ✅ Очистить список
+    void clear() {
+        Node* current = head;
+
+        while (current != nullptr) {
+            Node* next = current->next;
+            delete current;
+            current = next;
+        }
+
+        head = nullptr;
+        tail = nullptr;
+        size = 0;
+    }
+
+    // ✅ Вывести список
+    void printList() {
+        if (head == nullptr) {
+            cout << "List is empty\n";
+            return;
+        }
+
+        Node* current = head;
+        while (current != nullptr) {
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
+    }
+
+    // ✅ Проверка наличия значения
+    bool contains(int value) {
+        Node* current = head;
+
+        while (current != nullptr) {
+            if (current->data == value) {
+                return true;
+            }
+            current = current->next;
+        }
+
+        return false;
+    }
+
+    // ✅ Индекс первого вхождения значения
+    int indexOf(int value) {
+        Node* current = head;
+        int index = 0;
+
+        while (current != nullptr) {
+            if (current->data == value) {
+                return index;
+            }
+            current = current->next;
+            index++;
+        }
+
+        return -1;
+    }
+};
