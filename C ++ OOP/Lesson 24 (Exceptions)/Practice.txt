@@ -1,0 +1,282 @@
+🎯 "Система управления банковскими счетами"
+
+Создать консольное приложение, которое позволяет пользователю:
+
+    создавать банковские счета;
+
+    вносить и снимать деньги;
+
+    переводить средства между счетами;
+
+    просматривать баланс.
+
+Программа должна быть устойчива к ошибкам и использовать механику исключений для их обработки.
+
+
+⚙️ Структура проекта
+
+Проект можно разделить на два класса
+
+BankAccount — класс, описывающий отдельный банковский счёт;
+
+Bank — класс, управляющий списком счетов;
+
+
+🏦 Класс BankAccount
+
+class BankAccount
+{
+private:
+    int id;
+    string owner;
+    double balance;
+
+public:
+    BankAccount(int id, string owner, double initialBalance);
+
+    void deposit(double amount);
+    void withdraw(double amount);
+    void transfer(BankAccount& to, double amount);
+
+    double getBalance() const;
+    string getOwner() const;
+    int getId() const;
+};
+
+💡 В качестве Id можно взять номер индекса в банке (accounts.size() или accounts.size() + 1).
+
+✅ Логика методов:
+
+deposit(double amount)
+
+    выбрасывает std::invalid_argument, если amount <= 0;
+
+    увеличивает баланс.
+
+withdraw(double amount)
+
+    выбрасывает std::invalid_argument, если amount <= 0;
+
+    выбрасывает std::runtime_error, если balance < amount;
+
+    уменьшает баланс.
+
+transfer(BankAccount& to, double amount)
+
+    вызывает withdraw() у текущего счёта и deposit() у получателя;
+
+    при ошибке должно «всплыть» исключение от withdraw() или deposit().
+
+
+🧱 Класс Bank
+
+class Bank
+{
+private:
+    vector<BankAccount> accounts;
+
+public:
+    void createAccount(string owner, double initialBalance);
+    BankAccount& findAccount(int id);
+    void printAllAccounts();
+};
+
+
+✅ Логика:
+
+createAccount()
+
+    выбрасывает std::invalid_argument, если имя пустое или баланс отрицательный;
+
+    добавляет новый счёт в список.
+
+findAccount(int id)
+
+    возвращает ссылку на счёт, если найден;
+
+    выбрасывает std::out_of_range, если счёт с таким ID не найден.
+
+
+
+
+
+====================================================================================
+
+
+
+
+
+#include <iostream>
+#include <vector>
+#include <stdexcept> // для стандартных исключений
+using namespace std;
+
+class BankAccount
+{
+private:
+    int id;
+    string owner;
+    double balance;
+
+public:
+    BankAccount(int id, string owner, double initialBalance)
+    {
+        if (owner.empty())
+            throw invalid_argument("Имя владельца не может быть пустым.");
+
+        if (initialBalance < 0)
+            throw invalid_argument("Начальный баланс не может быть отрицательным.");
+
+        this->id = id;
+        this->owner = owner;
+        this->balance = initialBalance;
+    }
+
+    int getId() const { return id; }
+    string getOwner() const { return owner; }
+    double getBalance() const { return balance; }
+
+    // Пополнение счёта
+    void deposit(double amount)
+    {
+        if (amount <= 0)
+            throw invalid_argument("Сумма для пополнения должна быть больше нуля.");
+
+        balance += amount;
+        cout << "✅ " << owner << " пополнил счёт на " << amount << " руб.\n";
+    }
+
+    // Снятие средств
+    void withdraw(double amount)
+    {
+        if (amount <= 0)
+            throw invalid_argument("Сумма для снятия должна быть больше нуля.");
+
+        if (balance < amount)
+            throw runtime_error("Недостаточно средств на счёте.");
+
+        balance -= amount;
+        cout << "💸 " << owner << " снял " << amount << " руб.\n";
+    }
+
+    // Перевод между счетами
+    void transfer(BankAccount& to, double amount)
+    {
+        if (this->id == to.id)
+            throw invalid_argument("Нельзя переводить деньги самому себе.");
+
+        // Вызовем методы, которые сами выбросят ошибки при необходимости
+        this->withdraw(amount);
+        to.deposit(amount);
+
+        cout << "🔁 Переведено " << amount << " руб. от " << owner
+             << " к " << to.getOwner() << ".\n";
+    }
+};
+
+// =====================================================================
+
+class Bank
+{
+private:
+    vector<BankAccount> accounts;
+
+public:
+    // Создание счёта
+    void createAccount(string owner, double initialBalance)
+    {
+        int id = accounts.size() + 1;
+        BankAccount account(id, owner, initialBalance);
+        accounts.push_back(account);
+
+        cout << "🏦 Счёт #" << id << " создан для " << owner
+             << " с балансом " << initialBalance << " руб.\n";
+    }
+
+    // Поиск счёта по ID
+    BankAccount& findAccount(int id)
+    {
+        for (auto& acc : accounts)
+        {
+            if (acc.getId() == id)
+                return acc;
+        }
+
+        throw out_of_range("Счёт с таким ID не найден.");
+    }
+
+    // Печать всех счетов
+    void printAllAccounts()
+    {
+        cout << "\n📋 Текущие счета:\n";
+        for (const auto& acc : accounts)
+        {
+            cout << "ID: " << acc.getId()
+                 << " | Владелец: " << acc.getOwner()
+                 << " | Баланс: " << acc.getBalance() << " руб.\n";
+        }
+        cout << endl;
+    }
+};
+
+// =====================================================================
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+
+    Bank bank;
+
+    try
+    {
+        bank.createAccount("Иван", 5000);
+        bank.createAccount("Анна", 10000);
+        bank.createAccount("Пётр", 2000);
+
+        bank.printAllAccounts();
+
+        // Работа со счетами
+        BankAccount& ivan = bank.findAccount(1);
+        BankAccount& anna = bank.findAccount(2);
+
+        cout << "\n=== Операции ===\n";
+        ivan.deposit(1500);
+        anna.withdraw(2000);
+        ivan.transfer(anna, 3000);
+
+        // Ошибка: попытка снять больше, чем есть
+        anna.withdraw(20000);
+
+        // Ошибка: перевод самому себе
+        ivan.transfer(ivan, 100);
+
+        // Ошибка: несуществующий счёт
+        bank.findAccount(99);
+    }
+
+    catch (const invalid_argument& ex)
+    {
+        cout << "\n⚠️ Некорректные данные: " << ex.what() << endl;
+    }
+
+    catch (const out_of_range& ex)
+    {
+        cout << "\n❌ Ошибка поиска счёта: " << ex.what() << endl;
+    }
+
+    catch (const runtime_error& ex)
+    {
+        cout << "\n💥 Ошибка операции: " << ex.what() << endl;
+    }
+
+    catch (const exception& ex)
+    {
+        cout << "\n🚨 Неизвестная ошибка: " << ex.what() << endl;
+    }
+
+    cout << "\n=== Итоговое состояние счетов ===";
+    bank.printAllAccounts();
+
+    cout << "✅ Программа завершена корректно." << endl;
+    return 0;
+}
